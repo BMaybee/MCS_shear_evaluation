@@ -79,12 +79,13 @@ def data_prep(region,model):
 
         if region == "Sahel":
             MCS_data=MCS_data[(MCS_data['clat']< 19) & (MCS_data['clat']> 9) & (MCS_data['clon']< 12) & (MCS_data['clon']> -12)]
-        """
+
+        # Remove crazy low-level humidity values found occasionally
         try:
             MCS_data=MCS_data[MCS_data['q925']<1]
         except:
             pass
-        """
+        
         if model[:3].upper()!="CP4":
             res=11.1
         else:
