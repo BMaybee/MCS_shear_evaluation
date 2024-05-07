@@ -162,7 +162,8 @@ def bin_1d(MCS_data,MCS_var,bin_var,red_var,grid_spec=10,grid_spec2=None,cut_off
     return bin_vals, bin_errs, bin_counts
     
 
-def plot_hist(MCS_data,region,model,MCS_var,unit="",cmap="viridis",nice_name="",moist_var="tcw",shear_var="ushear650_850",ax=None,vmax=None,cut_off=5,grid_spec=10,save=False):      
+def plot_hist(MCS_data,region,model,MCS_var,unit="",cmap="viridis",nice_name="",moist_var="tcw",shear_var="ushear650_850",
+              max_pcle=0.99,min_pcle=0.01,ax=None,vmax=None,cut_off=5,grid_spec=10,save=False):      
     try:
         plev=int(shear_var[-3:])
         try:
@@ -175,7 +176,7 @@ def plot_hist(MCS_data,region,model,MCS_var,unit="",cmap="viridis",nice_name="",
     except:
         pass
 
-    hist, ctt_vals, area_vals, counts = bin_2d(MCS_data,rain_var=MCS_var,moist_var=moist_var,shear_var=shear_var,t_var="tmin",grid_spec=grid_spec)
+    hist, ctt_vals, area_vals, counts = bin_2d(MCS_data,rain_var=MCS_var,moist_var=moist_var,shear_var=shear_var,t_var="tmin",grid_spec=grid_spec,max_pcle=max_pcle,min_pcle=min_pcle)
     hist=hist.where(counts>=cut_off)
     if hist.max() - hist.min() > hist.max() and cmap=="viridis":
         cmap="RdBu"
