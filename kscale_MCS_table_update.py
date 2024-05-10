@@ -402,7 +402,7 @@ if update=="cores":
         # Firstly environmental fully saturated theta-e
         env_prf=iris.load(ffile+"d%03d.pp"%(env_tstep))
         # Load air temperature profiles (K)
-        env_t=load_file(env_prf[0],region).sel(pressure=500,time=slice(t1,t2))
+        env_t=load_file(env_prf[0],region).sel(pressure=500,time=edate,method="nearest")
         # Saturated, so fix RH at 100%
         env_rh=100*np.ones(env_t.shape)
         # Dummy pressure field for metpy routines
